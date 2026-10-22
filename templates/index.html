@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Eye Attendance</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Smart Eye Attendance</h1>
+        <p>AI-Powered Face Recognition System</p>
+    </header>
+
+    <main>
+        <section class="cards">
+            <div class="card">
+                <h3>Total Students</h3>
+                <p>{{ total_students }}</p>
+            </div>
+            <div class="card">
+                <h3>Present Today</h3>
+                <p>{{ present_today }}</p>
+            </div>
+        </section>
+
+        <h2>Today's Attendance</h2>
+        <div class="table-box">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in records %}
+                    <tr>
+                        <td>{{ row.get('Student ID', '') }}</td>
+                        <td>{{ row.get('Name', '') }}</td>
+                        <td>{{ row.get('Date', '') }}</td>
+                        <td>{{ row.get('Time', '') }}</td>
+                        <td><span class="present">{{ row.get('Status', '') }}</span></td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5">No attendance recorded today.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
